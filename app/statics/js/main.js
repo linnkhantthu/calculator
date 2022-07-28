@@ -1,5 +1,5 @@
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-const operators = ['+', '-', '/']
+const operators = ['+', '-', '/', '*']
 const others = ['=', 'AC']
 var temp = ""
 let num_1
@@ -24,16 +24,21 @@ function calculate(input){
     }
     else if(operators.includes(input)){
         // user inserted an operator
-        if(num_1){
-            num_1 = operate(num_1, parseInt(temp), op)    
+        if(op){
+            
         }
         else{
-            num_1 = parseInt(temp)
+            if(num_1){
+                num_1 = operate(num_1, parseInt(temp), op)    
+            }
+            else{
+                num_1 = parseInt(temp)
+            }
+            op = input
+            temp = ""
+            console.log(num_1)
+            result.value = num_1
         }
-        op = input
-        temp = ""
-        console.log(num_1)
-        result.value = num_1
     }
     else{
         if(input == '='){
@@ -46,14 +51,10 @@ function calculate(input){
             history_tag.innerHTML = history
             history = ""
             result.value = final_result
+            final_result = undefined
         }
         else{
-            temp = ""
-            num_1  = undefined
-            op = undefined
-            result.value = ""
-            history = ""
-            history_tag.innerHTML = history
+            reset()
         }
     }
 }
@@ -64,10 +65,20 @@ function operate(num_1, num_2, op){
             return num_1 + num_2;
         case '-':
             return num_1 - num_2;
+        case '*':
+            return num_1 * num_2;
         case '/':
             return num_1 / num_2;
         
         default:
             break;
     }
+}
+function reset(){
+    temp = ""
+    num_1  = undefined
+    op = undefined
+    result.value = ""
+    history = ""
+    history_tag.innerHTML = history
 }

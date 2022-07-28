@@ -1,18 +1,18 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path')
 
 process.env.NODE_ENV = 'production'
 
 function createWindow() {
-    
     const win = new BrowserWindow({
         height: 600,
-        width: 400,
+        width: 420,
         minHeight: 500,
-        minWidth: 400,
+        minWidth: 420,
         webPreferences: {
             nodeIntegration: true,
-            enableRemoteModule: true
+            enableRemoteModule: true,
+            devTools: !app.isPackaged,
         },
         icon: 'app/assets/img/icon.png',
         title: 'Calculator',
@@ -22,7 +22,13 @@ function createWindow() {
     win.loadFile(
         'app/templates/main.html'
     );
+    const menu = Menu.buildFromTemplate(MenuTemplate)
+    Menu.setApplicationMenu(menu)
 }
+
+const MenuTemplate = [
+
+]
 
 app.whenReady().then(createWindow);
 

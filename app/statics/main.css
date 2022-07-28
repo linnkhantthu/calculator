@@ -1,5 +1,5 @@
 body{
-    background-color: grey;
+    background-color: rgb(37, 37, 37);
 }
 .cal-main{
     display: grid;
@@ -10,25 +10,35 @@ body{
 
 .num-pad{
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 25% 25% 25% 25%;
     height: 75vh;
     margin: 1px;
     padding: 0;
 }
 button{
-    background-color: gray;
-    border: 1px solid black;
-    font-size: xx-large;
+    background-color: rgb(37, 37, 37);
+    border: 1px solid rgb(22, 22, 22);
+    border-radius: 5px;
+    color: white;
+    padding: 1px;
+    font-size: 30px;
 }
 button:hover{
-    background-color: lightgray;
+    background-color: rgb(22, 22, 22);
     cursor: pointer;
 }
+button:active{
+    font-size: 28px;
+}
 .result{
-    font-size: x-large;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+    font-size: 30px;
     margin: 1px;
     text-align: right;
 }
 .history{
+    padding: 2px;
     position: absolute;
 }
