@@ -1,0 +1,34 @@
+body{
+    background-color: grey;
+}
+.cal-main{
+    display: grid;
+    grid-template-rows: 20% 75%;
+    margin: 0;
+    padding: 0px;
+}
+
+.num-pad{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    height: 75vh;
+    margin: 1px;
+    padding: 0;
+}
+button{
+    background-color: gray;
+    border: 1px solid black;
+    font-size: xx-large;
+}
+button:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+.result{
+    font-size: x-large;
+    margin: 1px;
+    text-align: right;
+}
+.history{
+    position: absolute;
+}
