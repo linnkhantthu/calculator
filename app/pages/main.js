@@ -21,7 +21,7 @@ function createWindow() {
         'app/templates/main.html'
     );
     const menu = Menu.buildFromTemplate(MenuTemplate)
-    Menu.setApplicationMenu(menu)
+    // Menu.setApplicationMenu(menu)
 }
 
 const MenuTemplate = [

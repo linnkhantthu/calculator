@@ -11,6 +11,11 @@ let isPreviousResult = false
 var result = document.getElementById("result") // Reslut field
 var history_tag = document.getElementById("history") // History label
 
+var plus = document.getElementById("btn-plus")
+var minus = document.getElementById("btn-minus")
+var multiply = document.getElementById("btn-multiply")
+var divide = document.getElementById("btn-divide")
+
 function calculate(input){
     const isNumber = numbers.includes(input)
     const isOperator = operators.includes(input)
@@ -30,6 +35,7 @@ function calculate(input){
 
             temp = "" // Clearing temp
             op = input // We got our operator
+            setBackgroundColors(op)
             break;
         case "others":
             if(input == "="){
@@ -49,6 +55,7 @@ function calculate(input){
 
 // To make operations
 function operate(num_1, num_2, op){
+    resetBackgroundColors()
     switch (op) {
         case '+':
             return num_1 + num_2;
@@ -70,6 +77,8 @@ function reset(){
 
     result.value = ""
     history_tag.innerHTML = ""
+
+    resetBackgroundColors()
 }
 
 function setResult(value){
@@ -78,4 +87,28 @@ function setResult(value){
 
 function setHistory(value){
     history_tag.innerHTML += value
+}
+
+function setBackgroundColors(op){
+    switch (op) {
+        case "+":
+            plus.style.backgroundColor = "#FA980B"
+            break;
+        case "-":
+            minus.style.backgroundColor = "#FA980B"
+            break;
+        case "*":
+            multiply.style.backgroundColor = "#FA980B"
+            break;
+        case "/":
+            divide.style.backgroundColor = "#FA980B"
+            break;
+    }
+}
+
+function resetBackgroundColors(){
+    plus.style.backgroundColor = "rgb(37, 37, 37)";
+    minus.style.backgroundColor = "rgb(37, 37, 37)";
+    multiply.style.backgroundColor = "rgb(37, 37, 37)";
+    divide.style.backgroundColor = "rgb(37, 37, 37)";
 }
