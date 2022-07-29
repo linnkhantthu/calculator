@@ -1,8 +1,6 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path')
 
-process.env.NODE_ENV = 'production'
-
 function createWindow() {
     const win = new BrowserWindow({
         height: 600,
@@ -23,7 +21,7 @@ function createWindow() {
         'app/templates/main.html'
     );
     const menu = Menu.buildFromTemplate(MenuTemplate)
-    // Menu.setApplicationMenu(menu)
+    Menu.setApplicationMenu(menu)
 }
 
 const MenuTemplate = [
