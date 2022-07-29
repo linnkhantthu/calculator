@@ -12,9 +12,9 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true,
-            devTools: !app.isPackaged,
+            devTools: true,
         },
-        icon: 'app/assets/img/icon.png',
+        icon: 'assets/png/icon.png',
         title: 'Calculator',
     });
 
@@ -23,7 +23,7 @@ function createWindow() {
         'app/templates/main.html'
     );
     const menu = Menu.buildFromTemplate(MenuTemplate)
-    Menu.setApplicationMenu(menu)
+    // Menu.setApplicationMenu(menu)
 }
 
 const MenuTemplate = [

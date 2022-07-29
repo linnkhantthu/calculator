@@ -1,64 +1,53 @@
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const operators = ['+', '-', '/', '*']
 const others = ['=', 'AC']
-var temp = ""
-let num_1
-let op
-let final_result
-let history = ""
 
-var result = document.getElementById("result")
-var history_tag = document.getElementById("history")
+let temp = "" // To store numbers till we got operator signs
+let num_1// When we got operator we transfer data from "temp" to "num_1"
+let op // To store operator
+let history = "" // To store history
+let isPreviousResult = false
+
+var result = document.getElementById("result") // Reslut field
+var history_tag = document.getElementById("history") // History label
 
 function calculate(input){
-    history += input
-    history_tag.innerHTML = history
-    if(final_result){
-        temp = final_result.toString()
-        final_result = undefined
-    }
-    if(numbers.includes(input)){
-        // user inserted a number
-        temp += input
-        result.value = temp
-    }
-    else if(operators.includes(input)){
-        // user inserted an operator
-        if(op){
+    const isNumber = numbers.includes(input)
+    const isOperator = operators.includes(input)
+    work = isNumber ? "number": (isOperator ? "operator": "others")
+    setHistory(input)
+    switch (work) {
+        case "number":
+            isPreviousResult = op ? true : false
+            temp += input
+            setResult(temp)
+            break;
+        case "operator":
+            num_1 = isPreviousResult ? num_1: parseFloat(temp) // Transferring data from temp to num_1
+            num_1 = op ? operate(num_1, parseFloat(temp), op): num_1
             
-        }
-        else{
-            if(num_1){
-                num_1 = operate(num_1, parseInt(temp), op)    
+            result.value = op ? (num_1 ? num_1: result.value): result.value
+
+            temp = "" // Clearing temp
+            op = input // We got our operator
+            break;
+        case "others":
+            if(input == "="){
+                num_1 = operate(num_1, parseFloat(temp), op)
+                setResult(num_1)
+                isPreviousResult = true
+                temp = ""
+                op = undefined
+                setHistory(num_1 + ",")
             }
             else{
-                num_1 = parseInt(temp)
+                reset()
             }
-            op = input
-            temp = ""
-            console.log(num_1)
-            result.value = num_1
-        }
-    }
-    else{
-        if(input == '='){
-            num_1 = operate(num_1, parseInt(temp), op)
-            final_result = num_1
-            temp = ""
-            num_1  = undefined
-            op = undefined
-            history += final_result.toString()
-            history_tag.innerHTML = history
-            history = ""
-            result.value = final_result
-            final_result = undefined
-        }
-        else{
-            reset()
-        }
+            break;
     }
 }
 
+// To make operations
 function operate(num_1, num_2, op){
     switch (op) {
         case '+':
@@ -69,16 +58,24 @@ function operate(num_1, num_2, op){
             return num_1 * num_2;
         case '/':
             return num_1 / num_2;
-        
-        default:
-            break;
     }
 }
+
+// When we pressed "AC" this function will be called
 function reset(){
     temp = ""
-    num_1  = undefined
+    num_1 = undefined
     op = undefined
-    result.value = ""
     history = ""
-    history_tag.innerHTML = history
+
+    result.value = ""
+    history_tag.innerHTML = ""
+}
+
+function setResult(value){
+    result.value = value
+}
+
+function setHistory(value){
+    history_tag.innerHTML += value
 }
